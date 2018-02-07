@@ -4,11 +4,11 @@ module.exports = {
   
     "selenium" : {
       "start_process" : true,
-      "server_path" : properties.seleniumServer,
+      "server_path" : properties.resourcePath + properties.seleniumServer,
       "log_path" : "",
       "port" : 4445,
       "cli_args" : {
-        "webdriver.chrome.driver" :  properties.chromedriver,
+        "webdriver.chrome.driver" : properties.resourcePath + properties.chromedriver,
       }
     },
   
