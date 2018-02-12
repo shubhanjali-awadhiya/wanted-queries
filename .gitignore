@@ -9,6 +9,7 @@ selenium-debug.log
 /tests_output
 nightwatchProps.js
 nightwatch.conf.js
+package-lock.json
 
 # production
 /build
