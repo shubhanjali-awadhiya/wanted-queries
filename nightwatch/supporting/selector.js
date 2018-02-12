@@ -47,7 +47,7 @@ module.exports = {
         X: 'div[class="bm-cross-button"]'
     },
     resultList: 'ul[id="errorList"]',
-    page: 'div[id="pageWrap"]',
+    page: 'div[id="outerContainer"]',
     intro: 'td[colspan="2"]',
     header: 'span[name="hdrHeader"]',
     mke: 'span[name="mkeHeader"]',
@@ -69,6 +69,10 @@ module.exports = {
     wrntId: 'span[name="widHeader"]',
     rFc: 'span[name="resHeader"]', //reason for cancellation
     dOc: 'span[name="datHeader"]', //date of cancellation
+    pageTitle: 'h1[class="titleBar"]',
+    welcomeScreen: 'div[id="welcomeScreen"]',
+    version: 'h6[name="version"]',
+    pageWrap: 'div[id="pageWrap"]',
 
     output: {
         header: 'h4[id="validHeader"]',
