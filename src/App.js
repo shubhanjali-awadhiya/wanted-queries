@@ -13,11 +13,11 @@ class App extends Component {
     }
     this.closeMenu = this.closeMenu.bind(this)
   }
-  handleStateChange(state){
-    this.setState({menuOpen: state.isOpen})
+  handleStateChange(state) {
+    this.setState({ menuOpen: state.isOpen })
   }
   closeMenu() {
-    this.setState({menuOpen: false})
+    this.setState({ menuOpen: false })
   }
   render() {
     return (
@@ -37,9 +37,11 @@ class App extends Component {
           </Link>
         </Menu>
         <div id="pageWrap">
-          {routes}
+          <div id="offset">
+            {routes}
+          </div>
           <div>
-            <h6> Version 1.0 </h6>
+            <h6 name="version"> &nbsp;Version 1.1 </h6>
           </div>
         </div>
       </div>
