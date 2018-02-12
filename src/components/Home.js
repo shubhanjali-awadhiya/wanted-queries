@@ -20,6 +20,8 @@ class Home extends Component {
             <li>This query is to close out an existing warrant.</li>
           </ul>
         </ul>
+
+        Required fields will be marked <span className="required">this way</span> when empty, and <span className="error">this way</span> when in error.
       </div>
     )
   }

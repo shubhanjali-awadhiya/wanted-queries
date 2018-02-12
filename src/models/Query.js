@@ -50,26 +50,29 @@ export default class Query {
     this.fields[code].input = val;
   }
 
-  validateFields(fields) {
+  validateFields(fields, queryType) {
     this.valid = true
     this.assembledQuery = ''
     let errorMessages = []
     let fieldNames = Object.getOwnPropertyNames(fields)
+    //checks for required fields
     fieldNames.forEach(name => {
       let field = fields[name]
-      if (field.required && this.fields[field.code].input === '') {
+      if (field.required && this.fields[field.code].input.trim() === '') {
         this.valid = false
-        errorMessages.push('The field named "' + field.name + '" must be included.\n')
+        errorMessages.push('The "' + field.name + '" field must be included.\n')
       }
 
       let results = field.validate(this.fields[field.code].input)
-      if (!results.valid && (field.required||(!field.required&&this.fields[name].input!==''))) {
+      if (!results.valid && (field.required || (!field.required && this.fields[name].input !== ''))) {
         this.valid = false
         let tempMessages = errorMessages
         errorMessages = tempMessages.concat(results.errorMessages)
       }
       return true
     })
+
+    //checks that optional groups have all members present
     this.optionalFieldGroups.map(group => {
       let fieldsEntered = 0
       for (let i = 0; i < group.set.length; i++) {
@@ -84,7 +87,7 @@ export default class Query {
     })
     if (this.valid) {
       Object.entries(this.fields).forEach(([key, value]) => {
-        if (key === 'wgt') {
+        if (key === 'wgt' && value.input !== '') {
           while (value.input.length < 3) {
             value.input = '0' + value.input; //will increase length with preceding zeroes until the value is 3 characters long
           }
@@ -92,13 +95,19 @@ export default class Query {
         this.assembledQuery += value.input + '.'
       })
       this.assembledQuery = this.assembledQuery.slice(0, -1)
-      let fieldCount = Object.keys(this.fields).length
-      let extraPeriods = this.assembledQuery.split(".").length - fieldCount
-      if (extraPeriods === 0) {
-        console.log('There are no extra periods (".") in the assembled text.')
-      }
-      else {
-        console.log('There are ' + extraPeriods + ' extra periods (".") in the assembled text.')
+    }
+
+    //if is a "modify" type query, checks that at least one optional field is edited
+    if (this.valid && queryType) {
+      let included = false
+      Object.entries(this.fields).forEach(([key, value]) => {
+        if (!value.required && value.input.trim() !== ''){
+          included = true
+        }
+      })
+      if (!included){
+        this.valid = false
+        errorMessages.push('At least one optional field needs to be included.')
       }
     }
     return ({ valid: this.valid, errorMessages: errorMessages, assembledQuery: this.assembledQuery })

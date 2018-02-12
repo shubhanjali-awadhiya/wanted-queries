@@ -10,6 +10,10 @@ body {
   position: absolute;
 }
 
+#offset {
+  margin-left: 20px;
+}
+
 .App {
   text-align: left;
 }
@@ -28,6 +32,18 @@ body {
 .inputField {
   margin-left: 5px;
   width: 75%;
+  border: 1px solid #AEAEAE;
+  border-radius: 2px;
+}
+
+.required {
+  border: 2px solid #9D9D9D;
+  box-shadow: 0 0 4px #6999FF;
+}
+
+.error {
+  border: 2px solid #9D9D9D;
+  box-shadow: 0 0 4px #FF6969;
 }
 
 .fieldHeader {
@@ -129,6 +145,6 @@ body {
 }
 
 #welcomeScreen {
-  padding-top: 75px;
+  padding-top: 30px;
   padding-left: 15px;
 }

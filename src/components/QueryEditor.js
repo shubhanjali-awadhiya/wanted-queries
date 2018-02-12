@@ -33,7 +33,7 @@ class QueryEditor extends Component {
   }
 
   submit() {
-    let results = this.state.query.validateFields(this.state.query.fields)
+    let results = this.state.query.validateFields(this.state.query.fields, this.props.type)
     this.setState({ notModified: true, validated: true, valid: results.valid, errorMessages: results.errorMessages, assembledQuery: results.assembledQuery })
   }
 
@@ -57,13 +57,13 @@ class QueryEditor extends Component {
         case 'exp':
           inputs.push(<div key={name}>
             <span className="fieldHeader" name={field.code + 'Header'}> {field.name} </span><br />
-            <input type="date" className="inputField" name={field.code + 'Input'} value={this.state.query.fields[field.code].input || ''} onChange={(e) => { this.handleChange(field.code, e.target.value) }}></input>
+            <input type="date" className={field.input.trim() === '' && field.required ? 'inputField required' : field.error ? 'inputField error' : 'inputField'} name={field.code + 'Input'} value={this.state.query.fields[field.code].input || ''} onChange={(e) => { this.handleChange(field.code, e.target.value) }} placeholder={this.state.query.fields[field.code].placeholder ? this.state.query.fields[field.code].placeholder : ""}></input>
           </div>)
           break;
         case 'sex':
           inputs.push(<div key={name}>
             <span className="fieldHeader" name={field.code + 'Header'}> {field.name} </span><br />
-            <select className="inputField" name={field.code + 'Input'} value={this.state.query.fields[field.code].input || ''} onChange={(e) => { this.handleChange(field.code, e.target.value) }}>
+            <select className={field.input.trim() === '' && field.required ? 'inputField required' : field.error ? 'inputField error' : 'inputField'} name={field.code + 'Input'} value={this.state.query.fields[field.code].input || ''} onChange={(e) => { this.handleChange(field.code, e.target.value) }} placeholder={this.state.query.fields[field.code].placeholder ? this.state.query.fields[field.code].placeholder : ""}>
               <option value=""></option>
               <option value="F">Female</option>
               <option value="M">Male</option>
@@ -75,13 +75,13 @@ class QueryEditor extends Component {
         case 'race':
           inputs.push(<div key={name}>
             <span className="fieldHeader" name={field.code + 'Header'}> {field.name} </span><br />
-            <select className="inputField" name={field.code + 'Input'} value={this.state.query.fields[field.code].input || ''} onChange={(e) => { this.handleChange(field.code, e.target.value) }}>
+            <select className={field.input.trim() === '' && field.required ? 'inputField required' : field.error ? 'inputField error' : 'inputField'} name={field.code + 'Input'} value={this.state.query.fields[field.code].input || ''} onChange={(e) => { this.handleChange(field.code, e.target.value) }} placeholder={this.state.query.fields[field.code].placeholder ? this.state.query.fields[field.code].placeholder : ""}>
               <option value=""></option>
               <option value="A">Asian / Pacific Islander</option>
               <option value="B">Black</option>
               <option value="H">Hispanic</option>
               <option value="I">American Indian / Alaskan Native</option>
-              <option value="W">White</option>              
+              <option value="W">White</option>
               <option value="U">Unknown</option>
             </select>
           </div>)
@@ -89,7 +89,7 @@ class QueryEditor extends Component {
         default:
           inputs.push(<div key={name}>
             <span className="fieldHeader" name={field.code + 'Header'}> {field.name} </span><br />
-            <input className="inputField" name={field.code + 'Input'} value={this.state.query.fields[field.code].input || ''} onChange={(e) => { this.handleChange(field.code, e.target.value) }}></input>
+            <input className={field.input.trim() === '' && field.required ? 'inputField required' : field.error ? 'inputField error' : 'inputField'} name={field.code + 'Input'} value={this.state.query.fields[field.code].input || ''} onChange={(e) => { this.handleChange(field.code, e.target.value) }} placeholder={this.state.query.fields[field.code].placeholder ? this.state.query.fields[field.code].placeholder : ""}></input>
           </div>
           )
       }
@@ -109,11 +109,8 @@ class QueryEditor extends Component {
                 <thead>
                   <tr>
                     <td colSpan='2'>
-                      <h4>
-                        Input pertinent information.
-                    </h4>
                       <p>
-                        Submit for a list of errors or an assembled query.
+                        Fields highlighted in blue are required, others are optional.  If hilighted in red, there is an error with that field.  When ready, click "submit" for an assembled query, or a list of errors if any exist.  You can also click "clear" to clear out the field.
                     </p>
                     </td>
                   </tr>
