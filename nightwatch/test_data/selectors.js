@@ -13,8 +13,6 @@ module.exports = {
         ols: 'input[name="olsInput"]', // DL state
         lic: 'input[name="licInput"]', //license plate
         lis: 'input[name="lisInput"]', //license state
-        //
-        //wid: 'input[name="widInput"]',
         //resInput: 'input[name="resInput"]', //reason for cancellation
         //doc: 'input[name="datInput"]',  //date of cancellation
     },
@@ -51,6 +49,7 @@ module.exports = {
         cancelWanted: 'p[name="cancelOption"]',
         X: 'div[class="bm-cross-button"]'
     },
+    wid: 'input[name="widInput"]',
     resultList: 'td[class="results"]',
     page: 'div[id="pageWrap"]'
  }
