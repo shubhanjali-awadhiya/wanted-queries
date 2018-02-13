@@ -12,7 +12,7 @@ module.exports = {
         browser.expect.element(selectors.page).text.to.contain('This query is to modify an existing warrant.')
         browser.expect.element(selectors.page).text.to.contain('Cancel Wanted')
         browser.expect.element(selectors.page).text.to.contain('This query is to close out an existing warrant.')
-        browser.expect.element(selectors.page).text.to.contain('Version 1.0')
+        browser.expect.element(selectors.page).text.to.contain('Version 1.1')
     },
 
     enterWantedUIcheck: (browser) => {
