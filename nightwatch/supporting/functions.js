@@ -20,7 +20,7 @@ module.exports = {
         browser.click(selectors.buttons.menu)
             .waitForElementVisible(selectors.buttons.enterWanted, 2000)
             .click(selectors.buttons.enterWanted)
-            .waitForElementVisible(selectors.buttons.submit, 2000)
+            .waitForElementVisible(selectors.buttons.clear, 2000)
         browser.expect.element(selectors.pageWrap).text.to.contain('Wanted Queries')
         browser.expect.element(selectors.page).text.to.contain('Enter Wanted')
         browser.expect.element(selectors.pageWrap).text.to.contain('Fields highlighted in blue are required, others are optional. If hilighted in red, there is an error with that field. When ready, click "submit" for an assembled query, or a list of errors if any exist. You can also click "clear" to clear out the field.')
@@ -166,7 +166,7 @@ module.exports = {
             .setValue(selectors.fields.doc, data.doc)
             .click(selectors.buttons.submit)
 
-            //browser.expect.element(selectors.resultList).text.to.contain(data.resultList_1)
+            browser.expect.element(selectors.resultList).text.to.contain(data.resultList_1)
             browser.expect.element(selectors.resultList).text.to.contain(data.resultList_2)
             browser.expect.element(selectors.resultList).text.to.contain(data.resultList_3)
             browser.expect.element(selectors.error_4).text.to.equal(data.resultList_4)
