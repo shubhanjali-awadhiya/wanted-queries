@@ -3,30 +3,31 @@ module.exports = {
 
 
     homeScreenUIcheck: (browser) => {
-        browser.expect.element(selectors.page).text.to.contain('Wanted Queries')
+        browser.expect.element(selectors.pageTitle).text.to.contain('Wanted Queries')
         browser.expect.element(selectors.buttons.menu).to.be.visible
         browser.expect.element(selectors.page).text.to.contain('Welcome to "Wanted Queries". This application will format and display query outputs to a criminal database similar to the NCIC\'s. The screens are summarized below, and can be accessed through the menu to the top left.')
-        browser.expect.element(selectors.page).text.to.contain('Enter Wanted')
-        browser.expect.element(selectors.page).text.to.contain('This query is to generate a new warrant.')
-        browser.expect.element(selectors.page).text.to.contain('Modify Wanted')
-        browser.expect.element(selectors.page).text.to.contain('This query is to modify an existing warrant.')
-        browser.expect.element(selectors.page).text.to.contain('Cancel Wanted')
-        browser.expect.element(selectors.page).text.to.contain('This query is to close out an existing warrant.')
-        browser.expect.element(selectors.page).text.to.contain('Version 1.1')
+        browser.expect.element(selectors.welcomeScreen).text.to.contain('Enter Wanted')
+        browser.expect.element(selectors.welcomeScreen).text.to.contain('This query is to generate a new warrant.')
+        browser.expect.element(selectors.welcomeScreen).text.to.contain('Modify Wanted')
+        browser.expect.element(selectors.welcomeScreen).text.to.contain('This query is to modify an existing warrant.')
+        browser.expect.element(selectors.welcomeScreen).text.to.contain('Cancel Wanted')
+        browser.expect.element(selectors.welcomeScreen).text.to.contain('This query is to close out an existing warrant.')
+        browser.expect.element(selectors.welcomeScreen).text.to.contain('Required fields will be marked this way when empty, and this way when in error.')
+        browser.expect.element(selectors.version).text.to.contain('Version 1.1')
     },
 
     enterWantedUIcheck: (browser) => {
         browser.click(selectors.buttons.menu)
             .waitForElementVisible(selectors.buttons.enterWanted, 2000)
             .click(selectors.buttons.enterWanted)
-            .waitForElementVisible(selectors.buttons.submit, 2000)
-        browser.expect.element(selectors.page).text.to.contain('Wanted Queries')
+            .waitForElementVisible(selectors.buttons.clear, 2000)
+        browser.expect.element(selectors.pageWrap).text.to.contain('Wanted Queries')
+        browser.expect.element(selectors.page).text.to.contain('Enter Wanted')
+        browser.expect.element(selectors.pageWrap).text.to.contain('Fields highlighted in blue are required, others are optional. If hilighted in red, there is an error with that field. When ready, click "submit" for an assembled query, or a list of errors if any exist. You can also click "clear" to clear out the field.')
         browser.expect.element(selectors.buttons.menu).to.be.visible
-        browser.expect.element(selectors.intro).text.to.contain('Input pertinent information.')
-        browser.expect.element(selectors.intro).text.contain('Submit for a list of errors or an assembled query.')
         browser.assert.visible(selectors.buttons.clear)
         browser.assert.visible(selectors.buttons.submit)
-        browser.expect.element(selectors.page).text.to.contain('Submit query for validation.')
+        browser.expect.element(selectors.pageWrap).text.to.contain('Submit query for validation.')
         browser.assert.visible(selectors.header)
         browser.assert.visible(selectors.mke)
         browser.assert.visible(selectors.oai)
@@ -44,7 +45,7 @@ module.exports = {
         browser.assert.visible(selectors.lP)
         browser.assert.visible(selectors.lS)
         browser.assert.visible(selectors.lExpd)
-        browser.expect.element(selectors.page).text.to.contain('Version 1.0')
+        browser.expect.element(selectors.version).text.to.contain('Version 1.1')
     },
 
     modifyWantedUIcheck: (browser) => {
@@ -52,10 +53,10 @@ module.exports = {
             .waitForElementVisible(selectors.buttons.modifyWanted, 2000)
             .click(selectors.buttons.modifyWanted)
             .waitForElementVisible(selectors.buttons.submit, 2000)
-        browser.expect.element(selectors.page).text.to.contain('Wanted Queries')
+        browser.expect.element(selectors.pageTitle).text.to.contain('Wanted Queries')
+        browser.expect.element(selectors.page).text.to.contain('Modify Wanted')
         browser.expect.element(selectors.buttons.menu).to.be.visible
-        browser.expect.element(selectors.intro).text.to.contain('Input pertinent information.')
-        browser.expect.element(selectors.intro).text.contain('Submit for a list of errors or an assembled query.')
+        browser.expect.element(selectors.pageWrap).text.to.contain('Fields highlighted in blue are required, others are optional. If hilighted in red, there is an error with that field. When ready, click "submit" for an assembled query, or a list of errors if any exist. You can also click "clear" to clear out the field.')       
         browser.assert.visible(selectors.buttons.clear)
         browser.assert.visible(selectors.buttons.submit)
         browser.expect.element(selectors.page).text.to.contain('Submit query for validation.')
@@ -77,7 +78,7 @@ module.exports = {
         browser.assert.visible(selectors.lP)
         browser.assert.visible(selectors.lS)
         browser.assert.visible(selectors.lExpd)
-        browser.expect.element(selectors.page).text.to.contain('Version 1.0')
+        browser.expect.element(selectors.version).text.to.contain('Version 1.1')
     },
 
     cancelWantedUIcheck: (browser) => {
@@ -85,17 +86,17 @@ module.exports = {
             .waitForElementVisible(selectors.buttons.cancelWanted, 2000)
             .click(selectors.buttons.cancelWanted)
             .waitForElementVisible(selectors.buttons.submit, 2000)
-        browser.expect.element(selectors.page).text.to.contain('Wanted Queries')
+        browser.expect.element(selectors.pageTitle).text.to.contain('Wanted Queries')
+        browser.expect.element(selectors.pageWrap).text.to.contain('Fields highlighted in blue are required, others are optional. If hilighted in red, there is an error with that field. When ready, click "submit" for an assembled query, or a list of errors if any exist. You can also click "clear" to clear out the field.')
         browser.expect.element(selectors.buttons.menu).to.be.visible
-        browser.expect.element(selectors.intro).text.to.contain('Input pertinent information.')
-        browser.expect.element(selectors.intro).text.contain('Submit for a list of errors or an assembled query.')
+        browser.expect.element(selectors.pageWrap).text.to.contain('Cancel Wanted')     
         browser.assert.visible(selectors.buttons.clear)
         browser.assert.visible(selectors.buttons.submit)
         browser.expect.element(selectors.page).text.to.contain('Submit query for validation.')
         browser.assert.visible(selectors.wrntId)
         browser.assert.visible(selectors.rFc)
         browser.assert.visible(selectors.dOc)
-        browser.expect.element(selectors.page).text.to.contain('Version 1.0')
+        browser.expect.element(selectors.version).text.to.contain('Version 1.1')
     },
     cancelWantedGoodData : (browser, data) => {
         browser
@@ -165,7 +166,7 @@ module.exports = {
             .setValue(selectors.fields.doc, data.doc)
             .click(selectors.buttons.submit)
 
-            //browser.expect.element(selectors.resultList).text.to.contain(data.resultList_1)
+            browser.expect.element(selectors.resultList).text.to.contain(data.resultList_1)
             browser.expect.element(selectors.resultList).text.to.contain(data.resultList_2)
             browser.expect.element(selectors.resultList).text.to.contain(data.resultList_3)
             browser.expect.element(selectors.error_4).text.to.equal(data.resultList_4)
