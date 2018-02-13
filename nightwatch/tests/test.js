@@ -25,7 +25,7 @@ module.exports = {
     // 'Testing cancel wanted screen with minimum allowable good data': browser => {
     //     functions.cancelWantedGoodData(browser, data.cancelWanted.goodDataMin)
     // },
-    // commeneting out because of the bug which id not allowing it to run.
+    // commeneting out because of the bug which is not allowing it to run.
 
     // 'Testing cancel wanted screen with maximum allowable good data': browser => {
     //     functions.cancelWantedGoodData(browser, data.cancelWanted.goodDataMax)
